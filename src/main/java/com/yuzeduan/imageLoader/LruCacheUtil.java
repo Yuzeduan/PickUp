@@ -10,36 +10,48 @@ import android.support.v4.util.LruCache;
  */
 
 public class LruCacheUtil {
+
     private static LruCache<String, Bitmap> mCache;
 
-    public LruCacheUtil(){
-        //获取最大可用内存
-        int maxMemory = (int) (Runtime.getRuntime().maxMemory()/ 1024);
-        //设置缓存的大小
-        int cacheSize = maxMemory / 8;
-        mCache = new LruCache<String, Bitmap>(cacheSize) {
-            @Override
-            protected int sizeOf(String key, Bitmap value) {
-                return value.getByteCount() / 1024;
+    public LruCacheUtil() {
+        if (mCache == null) {
+            synchronized (LruCache.class) {
+                if (mCache == null) {
+                    //获取最大可用内存
+                    int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+                    //设置缓存的大小
+                    int cacheSize = maxMemory / 8;
+                    mCache = new LruCache<String, Bitmap>(cacheSize) {
+                        @Override
+                        protected int sizeOf(String key, Bitmap value) {
+                            return value.getByteCount() / 1024;
+                        }
+                    };
+                }
             }
-        };
+        }
     }
 
     /**
      * 将图片加入到缓存中
-     * @param url 表示该Bitmap在LruCache中的键,即图片的下载路径
+     *
+     * @param url    表示该Bitmap在LruCache中的键,即图片的下载路径
      * @param bitmap 表示要缓存的Bitmap对象
      */
-    public void addBitmapToCache(String url, Bitmap bitmap){
+    public void addBitmapToCache(String url, Bitmap bitmap) {
+        if (bitmap == null) {
+            return;
+        }
         if (getBitmapFromCache(url) == null) {
             mCache.put(url, bitmap);
         }
     }
 
     /**
-     *从缓存中获取Bitmap
+     * 从缓存中获取Bitmap
+     *
      * @param url 表示LruCache的键值,即图片的下载路径
-     * @return 如果存在缓存则返回键对应的Bitmap对象,否则返回null
+     * @return 如果存在缓存则返回键对应的Bitmap对象, 否则返回null
      */
     public Bitmap getBitmapFromCache(String url) {
         return mCache.get(url);

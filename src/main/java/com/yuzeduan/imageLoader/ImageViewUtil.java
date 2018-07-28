@@ -7,7 +7,7 @@ import android.widget.ImageView;
 /**
  * 根据ImageView的大小获取图片的压缩宽高
  */
-public class ImageVeiwUtil {
+public class ImageViewUtil {
 
     public static int getWideSize(ImageView imageView){
         DisplayMetrics displayMetrics = imageView.getContext().getResources().getDisplayMetrics();
