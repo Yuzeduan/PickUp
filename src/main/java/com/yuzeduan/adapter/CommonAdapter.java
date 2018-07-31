@@ -9,25 +9,31 @@ import java.util.List;
 
 /**
  * 构建公共的适配器
- * @param <T> 表示子项的类型/,
+ * @param <T> 表示子项的类型,
  */
 public abstract class CommonAdapter<T> extends RecyclerView.Adapter<ViewHolder>{
     private Context mContext;
     private List<T> mDatas;
     private int mLayoutId;
-    private OnItemClickListener mOnItemClickListener;
+    private int mItemId;
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if(mOnItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                onItemViewClick(holder.getLayoutPosition());
+            }
+        });
+        if(mItemId != 0){
+            holder.itemView.findViewById(mItemId).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view){
-                    mOnItemClickListener.OnItemClickListener(holder.getLayoutPosition());
+                public void onClick(View view) {
+                    onItemClick(holder, holder.getLayoutPosition());
                 }
             });
         }
-        convert(holder, mDatas.get(position));
+        convert(holder, mDatas.get(position),position);
     }
 
     @Override
@@ -46,11 +52,8 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<ViewHolder>{
         return super.getItemViewType(position);
     }
 
-    public void setmOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
-    }
 
-    public CommonAdapter(Context mContext, List<T> mDatas, int mLayoutId) {
+    CommonAdapter(Context mContext, List<T> mDatas, int mLayoutId) {
         this.mContext = mContext;
         this.mLayoutId = mLayoutId;
         this.mDatas = mDatas;
@@ -61,9 +64,25 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<ViewHolder>{
      * @param viewHolder
      * @param item
      */
-    public abstract void convert(ViewHolder viewHolder, T item);
+    public abstract void convert(ViewHolder viewHolder, T item,int position);
 
-    public interface OnItemClickListener {
-        void OnItemClickListener(int position);
+    /**
+     * 抽象出来的点击整个itemView的后调用的方法
+     * @param position
+     */
+    public abstract void onItemViewClick(int position);
+
+    /**
+     * 抽象出来的点击itemView的控件后调用的方法
+     * @param position
+     */
+    public abstract void onItemClick(ViewHolder viewHolder, int position);
+
+    /**
+     * 用于给需要设置监听的itemView的控件赋值
+     * @param mItemId
+     */
+    public void setmItemId(int mItemId) {
+        this.mItemId = mItemId;
     }
 }

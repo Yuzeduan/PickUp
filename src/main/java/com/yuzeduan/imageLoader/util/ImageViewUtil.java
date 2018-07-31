@@ -1,4 +1,4 @@
-package com.yuzeduan.imageLoader;
+package com.yuzeduan.imageLoader.util;
 
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;

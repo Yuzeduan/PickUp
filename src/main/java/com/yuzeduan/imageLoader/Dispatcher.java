@@ -6,6 +6,7 @@ import android.os.Message;
 import android.widget.ImageView;
 
 import com.yuzeduan.bean.Holder;
+import com.yuzeduan.imageLoader.util.CPUUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;

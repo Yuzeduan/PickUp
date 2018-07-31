@@ -5,6 +5,10 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.widget.ImageView;
 
+import com.yuzeduan.imageLoader.util.ImageCompressionUtil;
+import com.yuzeduan.imageLoader.util.ImageViewUtil;
+import com.yuzeduan.imageLoader.util.LruCacheUtil;
+
 /**
  * 执行具体的任务
  */

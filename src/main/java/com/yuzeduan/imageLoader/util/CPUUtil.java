@@ -1,4 +1,4 @@
-package com.yuzeduan.imageLoader;
+package com.yuzeduan.imageLoader.util;
 
 import java.io.File;
 import java.io.FileFilter;

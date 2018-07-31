@@ -17,13 +17,15 @@ public final class SelectionSpec {
     private ImageType mType;
     private ImageEngine mImageEngine;
 
-    private static SelectionSpec INSTENCE;
+    private static SelectionSpec mInstance;
 
     private SelectionSpec(){}
 
     public static SelectionSpec getInstence(){
-        INSTENCE = new SelectionSpec();
-        return INSTENCE;
+        if(mInstance == null){
+            mInstance = new SelectionSpec();
+        }
+        return mInstance;
     }
 
     public static SelectionSpec getCleanInstance(){

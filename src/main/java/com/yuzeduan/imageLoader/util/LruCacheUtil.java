@@ -1,4 +1,4 @@
-package com.yuzeduan.imageLoader;
+package com.yuzeduan.imageLoader.util;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;

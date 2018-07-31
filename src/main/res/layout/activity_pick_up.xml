@@ -9,10 +9,34 @@
     >
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_images"
+        android:id="@+id/pickup_rv_images"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_above="@id/pickup_lt_bottom">
     </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/pickup_lt_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e0000000">
+
+        <TextView
+            android:id="@+id/pickup_tv_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_name"
+            android:layout_gravity="center"
+            android:textColor="#d3d3d3"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_triangle" />
+
+    </LinearLayout>
 
 </RelativeLayout>
