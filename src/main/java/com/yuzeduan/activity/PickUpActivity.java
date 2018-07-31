@@ -98,6 +98,7 @@ public class PickUpActivity extends AppCompatActivity {
                 if(mImageListPopupWindow == null){
                     return;
                 }
+                mImageListPopupWindow.setAnimationStyle(R.style.popwin_anim_style);
                 mImageListPopupWindow.showAsDropDown(mBottomLayout, 0, 0);
                 WindowUtil.lightOffWindow(PickUpActivity.this);
             }
